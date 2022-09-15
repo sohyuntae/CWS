@@ -1,0 +1,160 @@
+### Application 설정 ###
+spring:
+  application:
+    name: NH80WebAgent
+  devtools:
+    livereload:
+      enabled: true
+  servlet:
+    multipart:
+      file-size-threshold: 1MB
+      max-file-size: 100MB
+      max-request-size: 100MB
+  jmx:
+    enabled: false
+  jpa:
+    properties:
+      hibernate.default_batch_fetch_size: 1000
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+#      jdbc-url: jdbc:mysql://211.232.171.90:16033/nh80db?characterEncoding=UTF-8&serverTimezone=UTC
+#      username: nh80
+#      password: nhdb80_0329
+      jdbc-url: jdbc:mysql://192.168.100.167:3306/nh80db?characterEncoding=UTF-8&serverTimezone=UTC
+      username: root
+      password: izex_0329
+#      jdbc-url: jdbc:mysql://192.168.100.235:16033/nh80db?characterEncoding=UTF-8&serverTimezone=UTC
+#      username: nh80
+#      password: nhdb80_0329
+#      jdbc-url: jdbc:mysql://192.168.100.52:16033/nh80db?characterEncoding=UTF-8&serverTimezone=UTC
+#      username: nh80
+#      password: nhdb80_0329
+      driver-class-name: org.mariadb.jdbc.Driver
+      pool-name: hikari-cp
+      maximum-pool-size: 100
+      minimum-idle: 2
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+
+#  resources:
+#    add-mappings: true
+#    static-locations: classpath:/static/
+
+### Actuator 설정 ###
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+### Server 설정 ###
+server:
+  servlet:
+    register-default-servlet: true
+  version: 2022091201
+  configFolderPath: /usr/local/tomcat/webapps/ROOT/WEB-INF/classes/static/static/config/
+  port: 11033
+  https_port: 11040
+#  custom-config:
+#    - name: config.json
+#      address: 192.168.100.181
+#    - name: config_A.json
+#      address: localhost
+
+siteCustom:
+  siteName: echoProBM_Develop
+
+######### site #############
+#  echoProBM : 에코프로비엠 - 운영
+#  echoProBM_Develop : 에코프로비엠 - 개발
+######################
+
+ecoprobm:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      jdbc-url: jdbc:sqlserver://192.168.100.190:1433;DatabaseName=WEB_Practice
+      username: sa
+      password: ~WEB20160419!@
+      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+      pool-name: hikari-cp
+      maximum-pool-size: 100
+      minimum-idle: 2
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+
+key:
+  path: /usr/local/tomcat/encrypt/key.dat
+
+file:
+  path: /usr/local/tomcat/file/
+  sftp:
+    ip: 192.168.100.212
+    port: 22
+    userName: sftpuser
+    password: izex_0329
+    path: /sftp/sftproot
+  exifTool:
+    path: /usr/local/tomcat/exiftool/
+
+mail:
+  #host: 127.0.0.1
+  #host: smtp.gmail.com
+  host: qazws04.synology.me
+  port: 425
+  protocol: smtp
+  default-encoding: UTF-8
+  smtp:
+    start-tls-enable: false
+    auth: true
+
+  userAddr: mailtest_izex
+  userPass: izex_0329
+  rcvMail: qazws06@izex.co.kr/
+
+nethelper:
+  server:
+    ip: 192.168.100.212
+    port: 10070
+
+security:
+  keyStore: /usr/local/tomcat/encrypt/testJava.jks
+  jwt:
+    token:
+      secret-key: secret-key
+      expire-length: 50000
+
+logging:
+  file:
+    # Need to modify
+    path: /usr/local/tomcat/log
+    # Need to modify
+    max-history: 1
+
+graphql:
+  servlet:
+    #mapping: /graphql
+    enabled: false
+    corsEnabled: true
+    # if you want to @ExceptionHandler annotation for custom GraphQLErrors
+    #exception-handlers-enabled: true
+  client:
+    url: http://192.168.100.181:11030/graphql
+
+
+#graphiql:
+#  enabled: true
+#  mapping: /graphiql
+#  endpoint:
+#    graphql: /api/graphql
+#  cdn:
+#    enabled: true
+#    version: 0.12.0
+
