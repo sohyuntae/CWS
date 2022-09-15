@@ -4,7 +4,7 @@ plugins {
 	id 'java'
 }
 
-group = 'com.api'
+group = 'com'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
@@ -14,19 +14,40 @@ configurations {
 	}
 }
 
+ext {
+    querydslVersion = "5.0.0"
+}
+
 repositories {
 	mavenCentral()
 }
 
+bootJar {
+    archiveFileName = "CWS.jar"
+}
+
+/* 추후에 버전까지 체크 해서 넣을 예정 */
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
-	implementation 'org.springframework.boot:spring-boot-starter-graphql'
+	/* Spring boot */
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	implementation 'org.springframework.boot:spring-boot-starter-graphql'
+
+	/* Querydsl */
+	implementation("com.querydsl:querydsl-jpa:${querydslVersion}")
+	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
+	// querydsl JPAAnnotationProcessor 사용자 지정.
+	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+
+	/* DB */
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+	/* Lombok */
+	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	/* Test */
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework:spring-webflux'
 	testImplementation 'org.springframework.graphql:spring-graphql-test'
