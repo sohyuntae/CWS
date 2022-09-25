@@ -36,6 +36,7 @@ dependencies {
 
 	/* Querydsl */
 	implementation("com.querydsl:querydsl-jpa:${querydslVersion}")
+	implementation("com.querydsl:querydsl-sql:${querydslVersion}")
 	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
 	// querydsl JPAAnnotationProcessor 사용자 지정.
 	annotationProcessor "jakarta.persistence:jakarta.persistence-api"

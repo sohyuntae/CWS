@@ -1,6 +1,7 @@
 package com.api.cws.module.testApp.query;
 
 
+import com.api.cws.domain.Qstm_info;
 import com.api.cws.domain.stm_info;
 import com.api.cws.module.testApp.dto.SystemDto;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -18,8 +19,8 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-@Component
 @GraphQLApi
+@Component
 @RequiredArgsConstructor
 public class SystemQuery {
     private final JPAQueryFactory queryFactory;
