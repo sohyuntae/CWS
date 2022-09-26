@@ -2,7 +2,9 @@ package com.api.cws.module.testApp.query;
 
 
 import com.api.cws.domain.Qstm_info;
+import com.api.cws.domain.Qusr_info;
 import com.api.cws.domain.stm_info;
+import com.api.cws.domain.usr_info;
 import com.api.cws.module.testApp.dto.SystemDto;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import io.leangen.graphql.annotations.GraphQLContext;
@@ -30,6 +32,10 @@ public class SystemQuery {
     public List<SystemDto> getSystem() {
         List<stm_info> domainList = queryFactory
                 .selectFrom(Qstm_info.stm_info)
+                .fetch();
+
+        List<usr_info> userInfoList = queryFactory
+                .selectFrom(Qusr_info.usr_info)
                 .fetch();
 
         return domainList

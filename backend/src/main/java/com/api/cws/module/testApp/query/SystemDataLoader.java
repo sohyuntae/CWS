@@ -4,6 +4,7 @@ import com.api.cws.domain.Qstm_info;
 import com.api.cws.domain.stm_info;
 import com.api.cws.module.testApp.dto.SystemDto;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import io.leangen.graphql.spqr.spring.annotations.GraphQLApi;
 import lombok.RequiredArgsConstructor;
 import org.dataloader.BatchLoader;
 import org.springframework.stereotype.Component;
