@@ -1,30 +1,13 @@
 spring:
-  jpa:
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
   datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    hikari:
-      jdbc-url: jdbc:mariadb://192.168.100.167:3306/nh80db?characterEncoding=UTF-8&serverTimezone=UTC
-      username: root
-      password: izex_0329
-      driver-class-name: org.mariadb.jdbc.Driver
-      pool-name: hikari-cp
-      maximum-pool-size: 100
-      minimum-idle: 2
-
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://192.168.219.103:3306/nh80db?characterEncoding=UTF-8&serverTimezone=UTC
+    username: sa
+    password: izex_0329
+    jpa:
+      properties:
+        hibernate:
+          show_sql: true
+          format_sql: true
 server:
-  port: 11040
-
-graphql:
-  graphiql:
-    mapping: /graphiql
-    endpoint:
-      graphql: /graphql
-    basePath: /
-    enabled: true
-  spqr:
-    http:
-      enabled: false
+  port: 11044
