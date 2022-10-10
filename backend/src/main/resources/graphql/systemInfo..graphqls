@@ -1,0 +1,12 @@
+type stm_info {
+    id: Int
+    guKey: Int
+    ogKey: Int
+    siNm: String
+    siIp: String
+}
+
+type Query {
+    systemInfo(id: Int!): stm_info
+}
+
