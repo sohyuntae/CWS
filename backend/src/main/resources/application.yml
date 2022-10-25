@@ -14,17 +14,10 @@ spring:
       pool-name: hikari-cp
       maximum-pool-size: 100
       minimum-idle: 2
+  graphql:
+    graphiql:
+      path: /graphiql
+      enabled: true
 
 server:
   port: 11040
-
-#graphql:
-#  graphiql:
-#    mapping: /graphiql
-#    endpoint:
-#      graphql: /graphql
-#    basePath: /
-#    enabled: true
-#  spqr:
-#    http:
-#      enabled: false

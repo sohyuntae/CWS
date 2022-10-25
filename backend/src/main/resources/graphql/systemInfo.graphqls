@@ -1,0 +1,31 @@
+schema {
+    query: Query
+}
+
+# dto
+type SystemDto {
+    # 시스템키
+    systemKey: Int
+    # 그룹키
+    groupKey: Int
+    # 그룹 사용자 키
+    groupUserKey: Int
+    # 시스템명
+    systemName: String
+}
+
+# domain
+type stm_info {
+    siKey: Int
+    guKey: Int
+    ogKey: Int
+    siNm: String
+}
+
+type Query {
+    # 시스템 dto 조회
+    systemInfo(id: Int): [SystemDto]
+    # 시스템 domain 조회
+    systemInfo2: stm_info
+}
+

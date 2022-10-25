@@ -5,7 +5,9 @@ import com.api.cws.domain.stm_info;
 import com.api.cws.module.testApp.dto.SystemDto;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -13,10 +15,12 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class SystemQuery {
+@Controller
+public class SystemQuery{
     private final JPAQueryFactory queryFactory;
 
     @Transactional(readOnly = true)
+    @QueryMapping
     public List<SystemDto> systemInfo() {
         List<stm_info> domainList = queryFactory
                 .selectFrom(Qstm_info.stm_info)
@@ -34,5 +38,13 @@ public class SystemQuery {
                     return system;
                 })
                 .collect(Collectors.toList());
+    }
+
+    @QueryMapping
+    public List<stm_info> systemInfo2() {
+        return queryFactory
+                .selectFrom(Qstm_info.stm_info)
+                .where(Qstm_info.stm_info.guKey.isNotNull())
+                .fetch();
     }
 }
