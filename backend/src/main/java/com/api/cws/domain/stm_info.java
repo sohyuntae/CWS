@@ -1,6 +1,6 @@
 package com.api.cws.domain;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -10,6 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @NoArgsConstructor
+@Getter
 @Table(name = "stm_info")
 public class stm_info {
     @Id
