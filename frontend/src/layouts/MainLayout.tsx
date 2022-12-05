@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 import { menus } from "../assets/data/menus";
 import Drawer from "../components/Drawer";
+import { Container } from "@mui/material";
 
 interface Props {
   window?: () => Window;
@@ -24,7 +25,7 @@ export default function MainLayout(props: Props) {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box>
       <AppBar component="nav">
         <Toolbar>
           <IconButton
@@ -55,7 +56,9 @@ export default function MainLayout(props: Props) {
       </Box>
       <Box component="main" sx={{ p: 3 }}>
         <Toolbar />
-        <Typography>{props.children}</Typography>
+        <Typography>
+          <Container>{props.children}</Container>
+        </Typography>
       </Box>
     </Box>
   );
