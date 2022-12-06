@@ -1,7 +1,6 @@
 package com.api.cws;
 
 import com.api.cws.domain.Qstm_info;
-import com.api.cws.domain.stm_info;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

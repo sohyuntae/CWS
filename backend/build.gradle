@@ -1,37 +1,34 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.3'
-	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+	id 'org.springframework.boot' version '2.7.5'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id 'java'
-}
-
-group = 'com'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
-
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+	id "com.netflix.dgs.codegen" version "5.4.0"
 }
 
 ext {
-    querydslVersion = "5.0.0"
+	querydslVersion = "5.0.0"
 }
+
+group = 'com.dgs'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
 
 repositories {
 	mavenCentral()
 }
 
-bootJar {
-    archiveFileName = "CWS.jar"
-}
-
-/* 추후에 버전까지 체크 해서 넣을 예정 */
 dependencies {
-	/* Spring boot */
+	/* netflix */
+	implementation(platform('com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:5.3.0'))
+	implementation "com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter"
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.projectlombok:lombok:1.18.22'
+
+	/* scalar 사용가능하게 해주는 라이브러리. */
+	implementation 'com.netflix.graphql.dgs:graphql-dgs-extended-scalars'
+
+	/* spring boot */
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	implementation 'org.springframework.boot:spring-boot-starter-graphql'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.7.3'
 
 	/* Querydsl */
@@ -50,11 +47,17 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 
 	/* Test */
+	testImplementation("com.netflix.graphql.dgs:graphql-dgs-client")
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework:spring-webflux'
-	testImplementation 'org.springframework.graphql:spring-graphql-test'
+	testImplementation("org.springframework.boot:spring-boot-starter-webflux")
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+generateJava {
+	schemaPaths = ["${projectDir}/src/main/resources/schema"] // List of directories containing schema files
+	packageName = 'com.dgs.dgsframework' // The package name to use to generate sources
+	generateClient = true // Enable generating the type safe query API
 }
