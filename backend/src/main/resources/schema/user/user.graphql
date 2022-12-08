@@ -16,7 +16,7 @@ type UserInfo {
     # User Email
     userEmail: String
     # User Phone
-    userPhone: Int
+    userPhone: String
 }
 
 input addUserInfo {
