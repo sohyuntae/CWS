@@ -30,8 +30,8 @@ function Drawer(props: Props) {
       </Typography>
       <Divider />
       <List>
-        {menus.map((menu) => (
-          <Link to={menu.link}>
+        {menus.map((menu, index) => (
+          <Link to={menu.link} key={index}>
             <ListItem key={menu.name} disablePadding>
               <ListItemButton sx={{ textAlign: "center" }}>
                 <ListItemText primary={menu.name} />

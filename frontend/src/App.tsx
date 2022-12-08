@@ -4,7 +4,8 @@ import MainLayout from "./layouts/MainLayout";
 import HomePage from "./pages/HomePage";
 import IntroPage from "./pages/IntroPage";
 import NewsPage from "./pages/NewsPage";
-import PortfolioPage from "./pages/PortfolioPage";
+import PortfolioPage from "./pages/portfolio/PortfolioPage";
+import PortfolioViewPage from "./pages/portfolio/PortfolioViewPage";
 import RequestPage from "./pages/RequestPage";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<HomePage />}></Route>
             <Route path="/intro" element={<IntroPage />}></Route>
             <Route path="/portfolio" element={<PortfolioPage />}></Route>
+            <Route path="/portfolio/:portfolioId" element={<PortfolioViewPage />}></Route>
             <Route path="/request" element={<RequestPage />}></Route>
             <Route path="/news" element={<NewsPage />}></Route>
           </Routes>
