@@ -5,6 +5,11 @@ extend type Query {
     getUserInfo(uid: String): UserInfo
 }
 
+extend type Mutation  {
+    # 유저 저장
+    setUserInfo(userInfo: addUserInfo): String
+}
+
 # 유저 정보
 type UserInfo {
     # User ID
