@@ -7,7 +7,6 @@ import { Button, CardActionArea, CardActions, CircularProgress } from "@mui/mate
 import { Link } from "react-router-dom";
 import { useRecoilValueLoadable } from "recoil";
 import { portfolioSelector } from "../../assets/states/portfolio";
-import { useEffect } from "react";
 import iPortfolio from "../../assets/interfaces/iPortfolio";
 
 function PortfolioPage() {
