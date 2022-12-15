@@ -1,42 +1,34 @@
 import {
-  Button,
   Card,
   CardActionArea,
-  CardActions,
   CardContent,
   CardMedia,
   CircularProgress,
-  Divider,
   Grid,
   IconButton,
   InputBase,
   Paper,
-  styled,
-  TextField,
   Typography,
 } from "@mui/material";
 import { useRecoilValueLoadable } from "recoil";
 import iNews from "../assets/interfaces/iNews";
 import { newsSelectorFamily } from "../assets/states/news";
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const NewsPage = () => {
-  const [query, setQuery] = useState<string>();
-  const [keyword, setKeyword] = useState<string>();
-  const { state, contents } = useRecoilValueLoadable(newsSelectorFamily(query!));
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setKeyword(value);
-  };
+  const [params, setParams] = useState<any>({
+    q: "java",
+  });
+  const inputRef = useRef<HTMLInputElement>();
+  const { state, contents } = useRecoilValueLoadable(newsSelectorFamily(params!));
 
   const handleClick = () => {
+    const keyword = inputRef.current!.value;
     if (!keyword) {
       return;
     } else {
-      setQuery(keyword);
+      setParams({ ...params, q: keyword });
     }
   };
 
@@ -46,16 +38,11 @@ const NewsPage = () => {
         News
       </Typography>
       <Paper component="div" sx={{ p: "2px 4px", display: "flex", alignItems: "center", width: 400, m: "20px auto" }}>
-        {/* <IconButton sx={{ p: "10px" }} aria-label="menu">
-          <MenuIcon />
-        </IconButton> */}
         <InputBase
-          id="query"
           sx={{ ml: 1, flex: 1 }}
           inputProps={{ "aria-label": "search keyword" }}
           placeholder="search keyword"
-          value={keyword}
-          onChange={handleChange}
+          inputRef={inputRef}
         />
         <IconButton type="button" sx={{ p: "10px" }} aria-label="search" onClick={handleClick}>
           <SearchIcon />
@@ -69,39 +56,35 @@ const NewsPage = () => {
         )}
         {state === "hasError" && <p>뉴스가 없습니다.</p>}
         {state === "hasValue" &&
-          contents.articles.map((data: iNews, index: number) => (
-            <Grid xs={12} sm={6} lg={3} key={index} item={true}>
-              <Card>
-                <a href={data.url} target="_blank">
-                  <CardActionArea>
-                    <CardMedia component="img" height="140" image={data.urlToImage} />
-                    <CardContent>
-                      <Typography
-                        gutterBottom
-                        variant="h5"
-                        component="div"
-                        style={{
-                          display: "-webkit-box",
-                          WebkitLineClamp: 2,
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden",
-                        }}
-                      >
-                        {data.title}
-                      </Typography>
-                      {/* <Typography variant="body2" color="text.secondary">
-                        {data.description}
-                      </Typography> */}
-                    </CardContent>
-                  </CardActionArea>
-                </a>
-                {/* <CardActions>
-                  <Button size="small" color="primary">
-                    Share
-                  </Button>
-                </CardActions> */}
-              </Card>
-            </Grid>
+          (contents.articles.length > 0 ? (
+            contents.articles.map((data: iNews, index: number) => (
+              <Grid xs={12} sm={6} lg={3} key={index} item={true}>
+                <Card>
+                  <a href={data.url} target="_blank">
+                    <CardActionArea>
+                      <CardMedia component="img" height="140" image={data.urlToImage} />
+                      <CardContent>
+                        <Typography
+                          gutterBottom
+                          variant="h5"
+                          component="div"
+                          style={{
+                            display: "-webkit-box",
+                            WebkitLineClamp: 2,
+                            WebkitBoxOrient: "vertical",
+                            overflow: "hidden",
+                          }}
+                        >
+                          {data.title}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </a>
+                </Card>
+              </Grid>
+            ))
+          ) : (
+            <p>뉴스가 없습니다.</p>
           ))}
       </Grid>
     </div>
