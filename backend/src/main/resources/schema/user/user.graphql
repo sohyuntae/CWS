@@ -25,9 +25,10 @@ type UserInfo {
 }
 
 input addUserInfo {
+    uiKey: Long
     uid: String!
     uPw: String!
     userName: String!
     userEmail: String
-    userPhone: Int
+    userPhone: String
 }
