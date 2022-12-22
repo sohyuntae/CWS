@@ -1,6 +1,6 @@
 import { AppBar, Box, Button, IconButton, Toolbar, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import iMenu from "../assets/interfaces/iMenu";
+import iMenu from "@/interfaces/iMenu";
 import MenuIcon from "@mui/icons-material/Menu";
 
 interface Props {
