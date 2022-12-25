@@ -62,7 +62,15 @@ const NewsPage = () => {
                 <Card>
                   <a href={data.url} target="_blank">
                     <CardActionArea>
-                      <CardMedia component="img" height="140" image={data.urlToImage} />
+                      <CardMedia
+                        component="img"
+                        height="140"
+                        image={data.urlToImage}
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = "/logo512.png";
+                        }}
+                      />
                       <CardContent>
                         <Typography
                           gutterBottom
