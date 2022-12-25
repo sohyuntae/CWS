@@ -3,10 +3,10 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 
-import { menus } from "../assets/data/menus";
-import Drawer from "../components/Drawer";
+import { menus } from "@/assets/data/menus";
+import Drawer from "@/components/Drawer";
 import { Container } from "@mui/material";
-import Header from "../components/Header";
+import Header from "@/components/Header";
 
 interface Props {
   window?: () => Window;

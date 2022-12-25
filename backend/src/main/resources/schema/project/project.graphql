@@ -1,0 +1,76 @@
+extend type Query {
+    # 프로젝트 조회
+    getProjectInfo(projectKey: [Long]): [projectInfo]
+}
+
+extend type Mutation  {
+    # 프로젝트 저장
+    setProjectInfo(addProjectInfo: addProjectInfo): String
+}
+
+# 요청 프로젝트
+type projectInfo {
+    #프로젝트 key
+    projectKey: Long
+    # 프로젝트 명
+    projectName: String
+    # 목적
+    purpose: String
+    # 견젹
+    estimation: String
+    # 내용
+    description: String
+    # 요청자 정보
+    requestUserInfo: UserInfo
+    # 파일 정보
+    fileList: [fileInfo]
+}
+
+# 파일 정보
+type fileInfo {
+    # 프로젝트 key
+    projectKey: Long
+    # 파일 key
+    fileKey: Long
+    # 파일명
+    fileName: String
+    # 파일경로
+    filePath: String
+    # 등록일시
+    regDate: DateTime
+    # 등록자
+    regUid: String
+}
+
+# add 프로젝트 param
+input addProjectInfo {
+    #프로젝트 key
+    projectKey: Long
+    # 프로젝트 명
+    projectName: String
+    # 목적
+    purpose: String
+    # 견젹
+    estimation: String
+    # 내용
+    description: String
+    # 요청자 uid
+    requestUid: String
+    # 파일 정보
+    fileList: [addFileInfo]
+}
+
+# add 파일 정보 param
+input addFileInfo {
+    # 프로젝트 key
+    projectKey: Long
+    # 파일 key
+    fileKey: Long
+    # 파일명
+    fileName: String
+    # 파일경로
+    filePath: String
+}
+
+
+

@@ -1,6 +1,6 @@
 import { Button, FormControl, Grid, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import iRequest from "../assets/interfaces/iRequest";
+import iRequest from "@/interfaces/iRequest";
 
 function RequestPage() {
   const [requestForm, setRequestForm] = useState<iRequest>({

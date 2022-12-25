@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValueLoadable } from "recoil";
-import { portfolioSelector } from "../../assets/states/portfolio";
-import iPortfolio from "../../assets/interfaces/iPortfolio";
+import { portfolioSelector } from "@/states/portfolio";
+import iPortfolio from "@/interfaces/iPortfolio";
 
 export default function PortfolioViewPage() {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function PortfolioViewPage() {
         setPortfolio(data);
       }
     }
-  }, [state]);
+  }, [state, contents, navigate, portfolioId]);
 
   return (
     <div>
