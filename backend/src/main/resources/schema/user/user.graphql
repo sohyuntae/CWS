@@ -1,8 +1,8 @@
 extend type Query {
     # 유저 정보 리스트
-    getUserList(uid: String): [UserInfo]
+    getUserList(uid: [Int]): [UserInfo]
     # 유저 단일 정보
-    getUserInfo(uid: String): UserInfo
+    getUserInfo(uid: Int): UserInfo
 }
 
 extend type Mutation  {
@@ -12,6 +12,7 @@ extend type Mutation  {
 
 # 유저 정보
 type UserInfo {
+    uiKey: Long
     # User ID
     uid: String
     # User PW

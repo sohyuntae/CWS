@@ -20,14 +20,14 @@ public class userQuery {
 
     @DgsQuery
     @Transactional(readOnly = true)
-    public List<UserInfo> getUserList(@InputArgument String uid) {
-        return userService.getUserList(uid);
+    public List<UserInfo> getUserList(@InputArgument List<Long> uiKey) {
+        return userService.getUserList(uiKey);
     }
 
     @DgsQuery
     @Transactional(readOnly = true)
-    public UserInfo getUserInfo(@InputArgument String uid) {
-        return userService.getUserInfo(uid);
+    public UserInfo getUserInfo(@InputArgument Long uiKey) {
+        return userService.getUserInfo(uiKey);
     }
 
     @DgsMutation

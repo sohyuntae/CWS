@@ -1,6 +1,6 @@
 extend type Query {
     # 프로젝트 조회
-    getProjectInfo(projectKey: [Long]): [projectInfo]
+    getProjectInfo(projectKey: [Int]): [projectInfo]
 }
 
 extend type Mutation  {

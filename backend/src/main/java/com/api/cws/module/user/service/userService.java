@@ -6,7 +6,7 @@ import com.dgs.dgsframework.types.addUserInfo;
 import java.util.List;
 
 public interface userService {
-    List<UserInfo> getUserList(String uid);
-    UserInfo getUserInfo(String uid);
+    List<UserInfo> getUserList(List<Long> uiKey);
+    UserInfo getUserInfo(Long uiKey);
     String setUserInfo(addUserInfo userInfo);
 }
