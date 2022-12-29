@@ -11,8 +11,8 @@ import {
   Typography,
 } from "@mui/material";
 import { useRecoilValueLoadable } from "recoil";
-import iNews from "../assets/interfaces/iNews";
-import { newsSelectorFamily } from "../assets/states/news";
+import iNews from "@/interfaces/iNews";
+import { newsSelectorFamily } from "@/states/news";
 import SearchIcon from "@mui/icons-material/Search";
 import { useRef, useState } from "react";
 
@@ -60,9 +60,17 @@ const NewsPage = () => {
             contents.articles.map((data: iNews, index: number) => (
               <Grid xs={12} sm={6} lg={3} key={index} item={true}>
                 <Card>
-                  <a href={data.url} target="_blank">
+                  <a href={data.url} target="_blank" rel="noopener noreferrer">
                     <CardActionArea>
-                      <CardMedia component="img" height="140" image={data.urlToImage} />
+                      <CardMedia
+                        component="img"
+                        height="140"
+                        image={data.urlToImage}
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = "/logo512.png";
+                        }}
+                      />
                       <CardContent>
                         <Typography
                           gutterBottom

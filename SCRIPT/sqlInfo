@@ -1,0 +1,74 @@
+-- SQL_INFO
+-- 테이블 설계는 나도 해본적 없어서 일단 화면 기준이 아니라 내 기준대로 만들어본것.
+-- 내용증 이상한 부분이 있으면 체크해서 수정 필요.
+
+-- 공통 정보
+CREATE TABLE `cws_pi_set`
+(
+    `CP_KEY`  INT(11)     NOT NULL AUTO_INCREMENT COMMENT 'CWS_공통키(한개만 존재)',
+    `CP_SET1` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
+    `CP_SET2` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
+    `CP_SET3` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
+    PRIMARY KEY (`CP_KEY`) USING BTREE
+)
+    COMMENT ='cws 프로젝트 공통 셋팅'
+    COLLATE = 'utf8mb4_general_ci'
+    ENGINE = InnoDB
+;
+
+-- 사용자 정보
+CREATE TABLE `usr_info`
+(
+    `ui_key`    INT(11)     NOT NULL AUTO_INCREMENT COMMENT '사용자키',
+    `ui_id`     VARCHAR(50) NOT NULL COMMENT '사용자ID' COLLATE 'utf8mb4_general_ci',
+    `ui_pw`     VARCHAR(50) NOT NULL COMMENT '사용자 패스워드' COLLATE 'utf8mb4_general_ci',
+    `ui_nm`     VARCHAR(30) NOT NULL COMMENT '사용자명' COLLATE 'utf8mb4_general_ci',
+    `email`     VARCHAR(50) NULL DEFAULT NULL COMMENT '이메일' COLLATE 'utf8mb4_general_ci',
+    `phon_nmbr` VARCHAR(50) NULL DEFAULT NULL COMMENT '휴대전화번호' COLLATE 'utf8mb4_general_ci',
+    `upd_dt`    DATETIME    NULL DEFAULT current_timestamp() COMMENT '수정일시',
+    `reg_dt`    DATETIME    NULL DEFAULT current_timestamp() COMMENT '등록일시',
+    PRIMARY KEY (`ui_key`) USING BTREE
+)
+    COMMENT ='사용자 정보'
+    COLLATE = 'utf8mb4_general_ci'
+    ENGINE = InnoDB
+;
+
+-- 프로젝트 정보
+CREATE TABLE `prjct_info`
+(
+    `PI_KEY`     INT(11)      NOT NULL AUTO_INCREMENT COMMENT '프로젝트 키',
+    `PI_NM`      VARCHAR(100) NOT NULL DEFAULT '' COMMENT '프로젝트 명' COLLATE 'utf8mb4_general_ci',
+    `PI_PURPOSE` VARCHAR(100) NOT NULL DEFAULT '' COMMENT '프로젝트 목적' COLLATE 'utf8mb4_general_ci',
+    `PI_ESTMT`   VARCHAR(100) NOT NULL DEFAULT '' COMMENT '프로젝트 견적' COLLATE 'utf8mb4_general_ci',
+    `PI_CNTNT`   TEXT         NOT NULL COMMENT '프로젝트 내용' COLLATE 'utf8mb4_general_ci',
+    `REQ_KEY`    INT(11)      NOT NULL DEFAULT '0' COMMENT '요청자 키',
+    `FI_KEY`     INT(11)      NOT NULL DEFAULT '0' COMMENT '파일 키',
+    `UPD_DT`     DATETIME     NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '수정일시',
+    `UPD_KEY`    INT(11)      NOT NULL DEFAULT '0' COMMENT '수정자 키',
+    `REG_DT`     DATETIME     NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '등록일시',
+    `REG_KEY`    INT(11)      NOT NULL DEFAULT '0' COMMENT '등록자 키',
+    PRIMARY KEY (`PI_KEY`) USING BTREE
+)
+    COMMENT ='CWS 프로젝트 정보'
+    COLLATE = 'utf8mb4_general_ci'
+    ENGINE = InnoDB
+;
+
+-- 파일 정보
+CREATE TABLE `file_info`
+(
+    `FI_KEY`     INT(11)     NOT NULL AUTO_INCREMENT COMMENT '파일 키',
+    `PI_KEY`     INT(11)     NOT NULL DEFAULT '0' COMMENT '프로젝트 키',
+    `FI_NM`      VARCHAR(50) NOT NULL DEFAULT '0' COMMENT '파일명' COLLATE 'utf8mb4_general_ci',
+    `FI_PATH`    VARCHAR(50) NOT NULL DEFAULT '0' COMMENT '파일 경로' COLLATE 'utf8mb4_general_ci',
+    `FI_SIZE_KB` INT(11)     NOT NULL DEFAULT '0' COMMENT '파일사이즈',
+    `REG_DT`     TIMESTAMP   NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '등록일시',
+    `REG_KEY`    INT(11)     NOT NULL DEFAULT '0' COMMENT '등록자 키',
+    PRIMARY KEY (`FI_KEY`) USING BTREE,
+    INDEX `PI_KEY` (`PI_KEY`) USING BTREE
+)
+    COMMENT ='파일 정보'
+    COLLATE = 'utf8mb4_general_ci'
+    ENGINE = InnoDB
+;

@@ -6,8 +6,8 @@ import CardMedia from "@mui/material/CardMedia";
 import { Button, CardActionArea, CardActions, CircularProgress } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useRecoilValueLoadable } from "recoil";
-import { portfolioSelector } from "../../assets/states/portfolio";
-import iPortfolio from "../../assets/interfaces/iPortfolio";
+import { portfolioSelector } from "@/states/portfolio";
+import iPortfolio from "@/interfaces/iPortfolio";
 
 function PortfolioPage() {
   const { state, contents } = useRecoilValueLoadable(portfolioSelector);

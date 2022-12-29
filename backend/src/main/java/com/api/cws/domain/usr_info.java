@@ -1,32 +1,44 @@
 package com.api.cws.domain;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.NoArgsConstructor;
+import javax.persistence.*;
+import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 
+// 사용자 정보
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
 @Table(name = "usr_info")
 public class usr_info {
+
+  // 사용자키
   @Id
-  @Column(name="UI_KEY")
+  @Column(name="ui_key")
   private Long uiKey;
-  @Column(name="UI_ID")
+  // 사용자ID
+  @Column(name="ui_id")
   private String uiId;
-  @Column(name="UI_PW")
+  // 사용자 패스워드
+  @Column(name="ui_pw")
   private String uiPw;
-  @Column(name="UI_NM")
+  // 사용자명
+  @Column(name="ui_nm")
   private String uiNm;
-  @Column(name="EMAIL")
+  // 이메일
+  @Column(name="email")
   private String email;
-  @Column(name="UI_PHONE")
-  private String userPhone;
+  // 휴대전화번호
+  @Column(name="phon_nmbr")
+  private String phonNmbr;
+  // 수정일시
+  @Column(name="upd_dt")
+  private Timestamp updDt;
+  // 등록일시
+  @Column(name="reg_dt")
+  private Timestamp regDt;
 }

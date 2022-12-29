@@ -6,7 +6,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemButton from "@mui/material/ListItemButton";
 
-import iMenu from "../assets/interfaces/iMenu";
+import iMenu from "@/interfaces/iMenu";
 import MuiDrawer from "@mui/material/Drawer";
 
 import { Link } from "react-router-dom";

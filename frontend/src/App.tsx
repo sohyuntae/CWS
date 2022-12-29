@@ -1,12 +1,12 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MainLayout from "./layouts/MainLayout";
-import HomePage from "./pages/HomePage";
-import IntroPage from "./pages/IntroPage";
-import NewsPage from "./pages/NewsPage";
-import { NotFoundPage } from "./pages/NotFoundPage";
-import PortfolioPage from "./pages/portfolio/PortfolioPage";
-import PortfolioViewPage from "./pages/portfolio/PortfolioViewPage";
-import RequestPage from "./pages/RequestPage";
+import MainLayout from "@/layouts/MainLayout";
+import HomePage from "@/pages/HomePage";
+import IntroPage from "@/pages/IntroPage";
+import NewsPage from "@/pages/NewsPage";
+import { NotFoundPage } from "@/pages/NotFoundPage";
+import PortfolioPage from "@/pages/portfolio/PortfolioPage";
+import PortfolioViewPage from "@/pages/portfolio/PortfolioViewPage";
+import RequestPage from "@/pages/RequestPage";
 
 function App() {
   return (
