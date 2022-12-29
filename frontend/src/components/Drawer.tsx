@@ -20,7 +20,7 @@ interface Props {
   handleDrawerToggle: () => void;
 }
 
-function Drawer(props: Props) {
+const Drawer = (props: Props) => {
   const { window, menus, mobileOpen, handleDrawerToggle } = props;
 
   const drawer = (
@@ -65,6 +65,6 @@ function Drawer(props: Props) {
       {drawer}
     </MuiDrawer>
   );
-}
+};
 
 export default Drawer;
