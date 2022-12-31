@@ -55,7 +55,7 @@ input addProjectInfo {
     # 내용
     description: String
     # 요청자 uid
-    requestUid: String
+    requestUidKey: Long
     # 파일 정보
     fileList: [addFileInfo]
 }

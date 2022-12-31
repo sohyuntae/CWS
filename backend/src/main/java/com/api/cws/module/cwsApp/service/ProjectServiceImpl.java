@@ -1,21 +1,22 @@
-package com.api.cws.module.cwsApp.repository;
+package com.api.cws.module.cwsApp.service;
 
 import com.api.cws.domain.Qfile_info;
 import com.api.cws.domain.Qprjct_info;
 import com.api.cws.domain.file_info;
 import com.api.cws.domain.prjct_info;
 import com.api.cws.module.user.service.userService;
-import com.dgs.dgsframework.types.UserInfo;
-import com.dgs.dgsframework.types.addProjectInfo;
-import com.dgs.dgsframework.types.fileInfo;
-import com.dgs.dgsframework.types.projectInfo;
+import com.dgs.dgsframework.types.*;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import com.api.cws.module.cwsApp.repository.prjctInfoRepository;
+import com.api.cws.module.cwsApp.repository.fileInfoRepository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,7 +31,11 @@ public class ProjectServiceImpl implements ProjectService {
     private final JPAQueryFactory queryFactory;
     private final userService userService;
 
+    private final prjctInfoRepository prjctInfoRepository;
+    private final fileInfoRepository fileInfoRepository;
+
     @Override
+    @Transactional(readOnly = true)
     public List<projectInfo> getProjectInfo(List<Long> projectKey) {
 
         // 추가적으로 조건에 대한 추가 작업 진행 예정
@@ -93,7 +98,48 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    @Transactional
     public String setProjectInfo(addProjectInfo addProjectInfo) {
+
+        Timestamp now = new Timestamp(java.lang.System.currentTimeMillis());
+
+        prjct_info projectInfo = new prjct_info();
+
+        if (addProjectInfo.getProjectKey() != null) {
+            projectInfo = prjctInfoRepository.findById(addProjectInfo.getProjectKey()).orElse(new prjct_info());
+            projectInfo.setUpdDt(now);
+            projectInfo.setUpdKey(addProjectInfo.getRequestUidKey());
+        } else {
+            projectInfo.setRegDt(now);
+            projectInfo.setRegKey(addProjectInfo.getRequestUidKey());
+        }
+
+        projectInfo.setPiNm(addProjectInfo.getProjectName());
+        projectInfo.setReqKey(addProjectInfo.getRequestUidKey());
+        projectInfo.setPiPurpose(addProjectInfo.getPurpose());
+        projectInfo.setPiEstmt(addProjectInfo.getEstimation());
+        projectInfo.setPiCntnt(addProjectInfo.getDescription());
+
+        prjct_info newProjectInfo = prjctInfoRepository.save(projectInfo);
+
+        setFileList(newProjectInfo.getPiKey(), addProjectInfo.getFileList(),addProjectInfo.getRequestUidKey());
+
         return "성공";
+    }
+
+    public void setFileList(Long piKey, List<addFileInfo> fileList, Long reqUiKey) {
+
+        Timestamp now = new Timestamp(java.lang.System.currentTimeMillis());
+
+        fileList.forEach(info -> {
+            file_info newInfo = new file_info();
+            newInfo.setFiKey(info.getFileKey());
+            newInfo.setPiKey(piKey);
+            newInfo.setFiNm(info.getFileName());
+            newInfo.setFiPath(info.getFilePath());
+            newInfo.setRegDt(now);
+            newInfo.setRegKey(reqUiKey);
+            fileInfoRepository.save(newInfo);
+        });
     }
 }
