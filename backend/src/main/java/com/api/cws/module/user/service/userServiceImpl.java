@@ -22,7 +22,7 @@ public class userServiceImpl implements userService {
     private final usrInfoRepository usrInfoRepository;
 
     @Override
-    public List<UserInfo> getUserList(String uid) {
+    public List<UserInfo> getUserList(List<Long> uiKey) {
         return queryFactory
                 .select(
                         Projections.fields(
@@ -31,17 +31,17 @@ public class userServiceImpl implements userService {
                                 Qusr_info.usr_info.uiPw.as("uPw"),
                                 Qusr_info.usr_info.uiNm.as("userName"),
                                 Qusr_info.usr_info.email.as("userEmail"),
-                                Qusr_info.usr_info.userPhone.as("userPhone")
+                                Qusr_info.usr_info.phonNmbr.as("userPhone")
                         )
                 )
                 .from(Qusr_info.usr_info)
-                .where(Qusr_info.usr_info.uiId.eq(uid))
+                .where(Qusr_info.usr_info.uiKey.in(uiKey))
                 .stream()
                 .collect(Collectors.toList());
     }
 
     @Override
-    public UserInfo getUserInfo(String uid) {
+    public UserInfo getUserInfo(Long uiKey) {
         return queryFactory
                 .select(
                         Projections.fields(
@@ -50,11 +50,11 @@ public class userServiceImpl implements userService {
                                 Qusr_info.usr_info.uiPw.as("uPw"),
                                 Qusr_info.usr_info.uiNm.as("userName"),
                                 Qusr_info.usr_info.email.as("userEmail"),
-                                Qusr_info.usr_info.userPhone.as("userPhone")
+                                Qusr_info.usr_info.phonNmbr.as("userPhone")
                         )
                 )
                 .from(Qusr_info.usr_info)
-                .where(Qusr_info.usr_info.uiId.eq(uid))
+                .where(Qusr_info.usr_info.uiKey.eq(uiKey))
                 .stream()
                 .findFirst()
                 .orElseGet(UserInfo::new);
@@ -68,7 +68,7 @@ public class userServiceImpl implements userService {
         usrInfo.setUiPw(userInfo.getUPw());
         usrInfo.setUiNm(usrInfo.getUiNm());
         usrInfo.setEmail(userInfo.getUserEmail());
-        usrInfo.setUserPhone(userInfo.getUserPhone());
+        usrInfo.setPhonNmbr(userInfo.getUserPhone());
         usrInfoRepository.save(usrInfo);
         return "성공";
     }

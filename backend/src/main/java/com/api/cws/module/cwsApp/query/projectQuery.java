@@ -1,6 +1,7 @@
 package com.api.cws.module.cwsApp.query;
 
 import com.api.cws.module.cwsApp.repository.ProjectService;
+import com.api.cws.module.cwsApp.service.*;
 import com.dgs.dgsframework.types.addProjectInfo;
 import com.dgs.dgsframework.types.projectInfo;
 import com.netflix.graphql.dgs.DgsComponent;

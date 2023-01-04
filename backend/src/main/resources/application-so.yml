@@ -14,6 +14,12 @@ spring:
       pool-name: hikari-cp
       maximum-pool-size: 100
       minimum-idle: 2
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:mem:testDB
+#    h2:
+#      console:
+#        enabled: true
+#        path: /h2-console
   graphql:
     graphiql:
       path: /graphiql

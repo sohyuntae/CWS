@@ -23,3 +23,7 @@ a {
 .text-center {
   text-align: center;
 }
+
+button.MuiButtonBase-root {
+  font-family: "Nanum Gothic Coding";
+}

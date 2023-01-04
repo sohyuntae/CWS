@@ -1,8 +1,7 @@
-package com.api.cws.module.cwsApp.repository;
+package com.api.cws.module.cwsApp.service;
 
 import com.dgs.dgsframework.types.addProjectInfo;
 import com.dgs.dgsframework.types.projectInfo;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
