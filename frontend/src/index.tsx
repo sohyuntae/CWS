@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { RecoilRoot } from "recoil";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const theme = createTheme({
   typography: {
@@ -13,11 +14,14 @@ const theme = createTheme({
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+const client = new QueryClient();
 root.render(
   <React.StrictMode>
     <RecoilRoot>
       <ThemeProvider theme={theme}>
-        <App />
+        <QueryClientProvider client={client}>
+          <App />
+        </QueryClientProvider>
       </ThemeProvider>
     </RecoilRoot>
   </React.StrictMode>

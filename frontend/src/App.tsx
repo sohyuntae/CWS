@@ -7,6 +7,7 @@ import { NotFoundPage } from "@/pages/NotFoundPage";
 import PortfolioPage from "@/pages/portfolio/PortfolioPage";
 import PortfolioViewPage from "@/pages/portfolio/PortfolioViewPage";
 import RequestPage from "@/pages/RequestPage";
+import { PokemonPage } from "@/pages/PokemonPage";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
               </MainLayout>
             }
           />
+          <Route path="/pokemon" element={<PokemonPage />} />
           <Route
             path="/news"
             element={

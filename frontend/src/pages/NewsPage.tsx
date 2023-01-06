@@ -15,12 +15,16 @@ import iNews from "@/interfaces/iNews";
 import { newsSelectorFamily } from "@/states/news";
 import SearchIcon from "@mui/icons-material/Search";
 import { useRef, useState } from "react";
-
+import { useQueryHook } from "@/hooks/useQueryHook";
+import QUERY_KEYS from "@/constants/queryKeys";
+import { getNews } from "@/apis/newsApi";
+import { useEffect } from "react";
 const NewsPage = () => {
   const [params, setParams] = useState<any>({
     q: "java",
   });
   const inputRef = useRef<HTMLInputElement>();
+  const { isLoading, isError, data } = useQueryHook([QUERY_KEYS.NEWS, params], getNews(params), { staleTime: 3 });
   const { state, contents } = useRecoilValueLoadable(newsSelectorFamily(params!));
 
   const handleClick = () => {
@@ -32,6 +36,13 @@ const NewsPage = () => {
     }
   };
 
+  useEffect(() => {
+    console.log("recoil");
+    console.log(contents);
+    console.log("react-query");
+    console.log(data);
+    console.log();
+  }, [data, contents]);
   return (
     <div>
       <Typography variant="h4" align="center" gutterBottom>

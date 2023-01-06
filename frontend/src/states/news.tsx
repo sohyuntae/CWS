@@ -1,5 +1,6 @@
 import axios from "axios";
-import { selectorFamily } from "recoil";
+import { atomFamily, selectorFamily } from "recoil";
+import { atom } from "jotai";
 
 const apiKey = "c813fd83574245dfbc06d771ae0ba570";
 
